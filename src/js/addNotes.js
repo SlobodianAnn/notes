@@ -12,5 +12,6 @@ addNoteButton.forEach((item) => {
     newNote.querySelector('.textarea_note').id = counter;
     newNote.querySelector('.textarea_note').value = '';
     notesWrapper.append(newNote);
+    console.log('some console log');
   });
 });
