@@ -7,7 +7,7 @@ const noteBlock = document.querySelector('.notes__block');
 let counter = 1;
 addNoteButton.forEach((item) => {
   item.addEventListener('click', () => {
-    counter + 2;
+    counter++;
     const newNote = noteBlock.cloneNode(true);
     newNote.querySelector('.textarea_note').id = counter;
     newNote.querySelector('.textarea_note').value = '';
