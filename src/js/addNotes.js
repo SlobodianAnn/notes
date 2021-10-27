@@ -1,16 +1,14 @@
 /* eslint no-plusplus: "error" */
+import { createNote } from './localStorage';
 
 const notesWrapper = document.querySelector('.notes__wrapper');
 const addNoteButton = document.querySelectorAll('.createNote__btn');
-const noteBlock = document.querySelector('.notes__block');
 
-let counter = 1;
+let counter = 0;
+
 addNoteButton.forEach((item) => {
   item.addEventListener('click', () => {
     counter += 1;
-    const newNote = noteBlock.cloneNode(true);
-    newNote.querySelector('.textarea_note').id = counter;
-    newNote.querySelector('.textarea_note').value = '';
-    notesWrapper.append(newNote);
+    notesWrapper.append(createNote(counter));
   });
 });

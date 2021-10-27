@@ -14,5 +14,6 @@ module.exports = {
     'no-plusplus': 'off',
     'no-tabs': 'off',
     'prefer-destructuring': 'off',
+    'no-use-before-define': 'off',
   },
 };
