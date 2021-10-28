@@ -17,10 +17,8 @@ function setItemsToLocalStorage() {
 const arrayOfKeysLocalStorage = Object.keys(localStorage).sort();
 
 arrayOfKeysLocalStorage.forEach((key, index) => {
-  console.log(key);
   const exisitingNote = document.querySelector(`#note${index}`);
   if (key === `note${index}` && !exisitingNote) {
-    console.log(key);
     const newNote = createNote(index, localStorage.getItem(`note${index}`));
     noteWrapper.append(newNote);
   } else if (document.querySelector(`#note${index}`)) {
