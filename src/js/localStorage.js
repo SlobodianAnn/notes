@@ -3,13 +3,13 @@ const noteWrapper = document.querySelector('.notes__wrapper');
 
 document.addEventListener('change', () => setItemsToLocalStorage());
 
+document.addEventListener('DOMSubtreeModified', () => deleteNote());
+
 // setItems to LocalStorage
 function setItemsToLocalStorage() {
   textArea = document.querySelectorAll('.textarea_note');
   textArea.forEach((item) => {
-    item.addEventListener('change', () => {
-      localStorage.setItem(`${item.id}`, item.value);
-    });
+    localStorage.setItem(item.id, item.value);
   });
 }
 
@@ -17,8 +17,10 @@ function setItemsToLocalStorage() {
 const arrayOfKeysLocalStorage = Object.keys(localStorage).sort();
 
 arrayOfKeysLocalStorage.forEach((key, index) => {
+  console.log(key);
   const exisitingNote = document.querySelector(`#note${index}`);
   if (key === `note${index}` && !exisitingNote) {
+    console.log(key);
     const newNote = createNote(index, localStorage.getItem(`note${index}`));
     noteWrapper.append(newNote);
   } else if (document.querySelector(`#note${index}`)) {
@@ -31,18 +33,39 @@ function createNote(id, value = '') {
   const div = document.createElement('div');
   div.classList.add('notes__block');
 
+  const deleteBtn = document.createElement('div');
+  deleteBtn.classList.add('delete__btn');
+
   const textAreaBlock = document.createElement('textarea');
   textAreaBlock.classList.add('textarea_note');
   textAreaBlock.id = `note${id}`;
   textAreaBlock.value = value;
 
   div.append(textAreaBlock);
+  div.append(deleteBtn);
   return div;
 }
+
+// delete function
+
+function deleteNote() {
+  const arrayNotes = document.querySelectorAll('.notes__block');
+
+  arrayNotes.forEach((note) => {
+    note.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target.className === 'delete__btn') {
+        const id = note.querySelector('textarea').id;
+        note.remove();
+        localStorage.removeItem(id);
+      }
+    });
+  });
+}
+deleteNote();
 
 // eslint-disable-next-line import/prefer-default-export
 export { createNote };
 
-// to do: fix saving info
-// to do: id note starts from 0 when reload page
-// split files and functions
+// todo: split files and functions
+// todo: fix appearing notes after delete and reload of page
