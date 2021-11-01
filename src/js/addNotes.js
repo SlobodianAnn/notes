@@ -1,5 +1,5 @@
 /* eslint no-plusplus: "error" */
-import { createNote } from './localStorage';
+import { createNote } from './createNote';
 
 const notesWrapper = document.querySelector('.notes__wrapper');
 const addNoteButton = document.querySelectorAll('.createNote__btn');
