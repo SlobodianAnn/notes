@@ -18,8 +18,10 @@ const arrayOfKeysLocalStorage = Object.keys(localStorage).sort();
 
 arrayOfKeysLocalStorage.forEach((key, index) => {
   const exisitingNote = document.querySelector(`#note${index}`);
-  if (key === `note${index}` && !exisitingNote) {
-    const newNote = createNote(index, localStorage.getItem(`note${index}`));
+  if (key.includes('note')) {
+    // eslint-disable-next-line radix
+    const indexNote = parseInt(key.match(/\d+/));
+    const newNote = createNote(indexNote, localStorage.getItem(`note${indexNote}`));
     noteWrapper.append(newNote);
   } else if (document.querySelector(`#note${index}`)) {
     exisitingNote.value = localStorage.getItem(`note${index}`);
@@ -66,4 +68,3 @@ deleteNote();
 export { createNote };
 
 // todo: split files and functions
-// todo: fix appearing notes after delete and reload of page

@@ -9,6 +9,9 @@ const lengthNotes = arrayNotes.length;
 
 let lastIndexNote = lengthNotes < 1 ? 0 : lengthNotes - 1;
 
+if (!document.querySelector('.notes__block')) {
+  notesWrapper.append(createNote(lastIndexNote));
+}
 addNoteButton.forEach((item) => {
   item.addEventListener('click', () => {
     lastIndexNote += 1;
